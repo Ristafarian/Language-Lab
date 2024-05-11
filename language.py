@@ -5,7 +5,10 @@ import os
 
 
 class Language(QMainWindow, Ui_MainWindow):
-    def __init__(self):
+    def __init__(self) -> None:
+        """
+        Class initialization.
+        """
         super().__init__()
         self.setupUi(self)
         self.reset()
@@ -21,7 +24,10 @@ class Language(QMainWindow, Ui_MainWindow):
         self.button_enter.clicked.connect(lambda: self.enter())
         self.button_reset.clicked.connect(lambda: self.reset())
 
-    def select(self):
+    def select(self) -> None:
+        """
+        Select language and open up dictionary entry options.
+        """
         try:
             if self.radio_spanish.isChecked():
                 pass
@@ -56,7 +62,10 @@ class Language(QMainWindow, Ui_MainWindow):
         except:
             self.label_select.setStyleSheet('color: red; font-weight: bold; background-color: rgb(255, 255, 127)')
 
-    def enter(self):
+    def enter(self) -> None:
+        """
+        Enter vocab-related data into language-specific dictionary.
+        """
         try:
             if self.radio_spanish.isChecked():
                 self.spanish()
@@ -73,7 +82,7 @@ class Language(QMainWindow, Ui_MainWindow):
         except:
             pass
 
-    def reset(self):
+    def reset(self) -> None:
         """
         Reset to language selection/initial configuration.
         """
@@ -101,7 +110,12 @@ class Language(QMainWindow, Ui_MainWindow):
         self.radio_interjection.hide()
         self.radio_determiner.hide()
 
-    def part_of_speech(self):
+    def part_of_speech(self) -> str:
+        """
+        Return string for part of speech (POS) based on radio button selection.
+        Return 'Not Specified' if no button is selected; this is useful if unsure of POS.
+        :return: String representing selected POS, or Not Specified if none selected.
+        """
         if self.radio_noun.isChecked():
             return 'Noun'
         elif self.radio_pronoun.isChecked():
@@ -123,8 +137,10 @@ class Language(QMainWindow, Ui_MainWindow):
         else:
             return 'Not Specified'
 
-
-    def uncheck(self):
+    def uncheck(self) -> None:
+        """
+        De-select all radio buttons.
+        """
         self.radio_spanish.setAutoExclusive(False)
         self.radio_spanish.setChecked(False)
         self.radio_spanish.setAutoExclusive(True)
@@ -169,8 +185,7 @@ class Language(QMainWindow, Ui_MainWindow):
         self.radio_determiner.setChecked(False)
         self.radio_determiner.setAutoExclusive(True)
 
-
-    def spanish(self):
+    def spanish(self) -> None:
         """
         1st: Check for, then set up, Spanish directory/dictionary if they don't exist.
         2nd: Enter new vocab into dictionary.
@@ -216,7 +231,7 @@ class Language(QMainWindow, Ui_MainWindow):
             self.label_enter.setText('Please enter vocab and translation')
             self.label_enter.setStyleSheet('color: black;')
 
-    def french(self):
+    def french(self) -> None:
         """
         1st: Check for, then set up, French directory/dictionary if they don't exist.
         2nd: Enter new vocab into dictionary.
@@ -262,7 +277,7 @@ class Language(QMainWindow, Ui_MainWindow):
             self.label_enter.setText('Please enter vocab and translation')
             self.label_enter.setStyleSheet('color: black;')
 
-    def korean(self):
+    def korean(self) -> None:
         """
         1st: Check for, then set up, Korean directory/dictionary if they don't exist.
         2nd: Enter new vocab into dictionary.
@@ -307,7 +322,7 @@ class Language(QMainWindow, Ui_MainWindow):
             self.label_enter.setText('Please enter vocab and translation')
             self.label_enter.setStyleSheet('color: black;')
 
-    def japanese(self):
+    def japanese(self) -> None:
         """
         1st: Check for, then set up, Japanese directory/dictionary if they don't exist.
         2nd: Enter new vocab into dictionary.
@@ -352,7 +367,7 @@ class Language(QMainWindow, Ui_MainWindow):
             self.label_enter.setText('Please enter vocab and translation')
             self.label_enter.setStyleSheet('color: black;')
 
-    def other(self):
+    def other(self) -> None:
         """
         1a: Check for, then set up, other language directory/dictionary if they don't exist.
         1b: Directory and Language will be based on user input.
@@ -404,5 +419,4 @@ class Language(QMainWindow, Ui_MainWindow):
         except:
             self.label_enter.setText('Please enter a language name.')
             self.label_enter.setStyleSheet('color: navy;')
-
 
